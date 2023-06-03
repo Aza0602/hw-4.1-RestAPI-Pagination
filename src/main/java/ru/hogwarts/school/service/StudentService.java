@@ -77,4 +77,16 @@ public class StudentService {
                 .map(Student::getFaculty);
     }
 
+    public int getCountOfStudents() {
+        return studentRepository.getCountOfStudents();
+    }
+
+    public double getAverageAgeOfStudents() {
+        return studentRepository.getAverageAgeOfStudents();
+    }
+
+    public List<Student> getLastStudents(int count) {
+        return studentRepository.getLastStudents(count);
+    }
+
 }
