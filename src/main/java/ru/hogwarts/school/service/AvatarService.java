@@ -1,10 +1,12 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ru.hogwarts.school.dto.AvatarDto;
 import ru.hogwarts.school.entity.Avatar;
 import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.exception.AvatarNotFoundException;
@@ -17,6 +19,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AvatarService {
@@ -75,4 +79,17 @@ public class AvatarService {
             throw new AvatarProcessingException();
         }
     }
+
+    public List<AvatarDto> getPage(int page, int size) {
+        return avatarRepository.getPage(PageRequest.of(page, size)).stream()
+                .collect(Collectors.toList());
+    }
+
+    
+
+/*    public List<AvatarDto> getPage(int page, int size) {
+        return avatarRepository.getPage(PageRequest.of(page, size)).stream()
+                .collect(Collectors.toList());
+    }*/
+
 }
